@@ -6,7 +6,7 @@ const indigo={
     //function
     book(flightnum,name)
     {
-       console.log(`${name} has booked ${this.airline} ${this.code} has ${flightnum}`);
+       console.log(`${name} has booked ${this.airline} flightcode=${this.code} has flightnumber= ${flightnum}`);
        this.bookings.push({flight:`${flightnum} ${this.code}`,name})
     }
     };
@@ -41,5 +41,40 @@ const flightdata=[45,"nisha"];
 book.apply(spicejet,flightdata);
 console.log(spicejet);
 
+//bind function 
+const bookin=book.bind(indigo);
+const booksj=book.bind(spicejet);
+const bookmu=book.bind(mumbai);
 
+bookin(123,'osheen');
 
+const bookin123=book.bind(indigo,123);
+bookin123('henry');
+
+console.log(indigo);
+
+mumbai.planes=200;
+mumbai.buyPlanes=function()
+{
+    console.log(this);
+
+    this.planes++;
+
+    console.log(this.planes);
+};
+
+mumbai.buyPlanes();
+//const ind =mumbai.buyPlanes.bind(indigo);
+//ind();
+
+const addTax = (rate,value)=>  value+value*rate;
+console.log(addTax(100,23));
+
+const taxcalc=addTax.bind(null,10);
+console.log(taxcalc(100));
+
+//converting the function calling another function by arrow function
+const tax=(rate)=>(value)=> value+value*rate;
+
+const vg=tax(25);
+console.log(vg(10));
